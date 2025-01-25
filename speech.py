@@ -2,6 +2,7 @@
 import openai
 import speech_recognition as sr
 import pyttsx3
+import pyaudio
 
 # OpenAI API key
 openai.api_key = 'your-api-key'
@@ -31,6 +32,13 @@ def chat_with_gpt(prompt):
 def speak(text):
     engine.say(text)
     engine.runAndWait()
+
+p = pyaudio.PyAudio()
+
+# List all available devices
+for i in range(p.get_device_count()):
+    info = p.get_device_info_by_index(i)
+    print(f"Device {i}: {info['name']}")
 
 # Main loop
 while True:
